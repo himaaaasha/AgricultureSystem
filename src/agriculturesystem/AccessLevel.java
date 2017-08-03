@@ -9,11 +9,7 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public class WebControllerUI {
+public enum AccessLevel {
+    FARMER, FOOD_PROCESSOR
     
-    public static void loginUser(String username, String password)
-    {
-        DataManagement.loginUser(username, password);
-        
-    }
 }
