@@ -9,11 +9,6 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public class WebControllerUI {
+public enum SensorType {
     
-    public static void loginUser(String username, String password)
-    {
-        DataManagement.loginUser(username, password);
-        
-    }
 }

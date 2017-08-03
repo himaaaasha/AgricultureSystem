@@ -5,23 +5,27 @@
  */
 package agriculturesystem;
 
+import java.util.Vector;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class Crop {
-    String cropName;
-
-    public Crop(String cropName) {
-        this.cropName = cropName;
+public class SetOfUsers extends Vector<User>{
+    public SetOfUsers()
+    {
+        super();
     }
-
-    public String getCropName() {
-        return cropName;
+    
+    public void addUser(User aUser) 
+    {
+        super.add(aUser);
     }
-
-    public void setCropName(String cropName) {
-        this.cropName = cropName;
+    
+    public void removeUser(User aUser)
+    {
+        super.remove(aUser);
     }
+    
     
 }

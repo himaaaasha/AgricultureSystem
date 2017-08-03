@@ -9,19 +9,19 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public class Crop {
-    String cropName;
+public class Area {
+    GPSCoord gpsPoints;
 
-    public Crop(String cropName) {
-        this.cropName = cropName;
+    public Area(GPSCoord gpsPoints) {
+        this.gpsPoints = gpsPoints;
     }
 
-    public String getCropName() {
-        return cropName;
+    public GPSCoord getGpsPoints() {
+        return gpsPoints;
     }
 
-    public void setCropName(String cropName) {
-        this.cropName = cropName;
+    public void setGpsPoints(GPSCoord gpsPoints) {
+        this.gpsPoints = gpsPoints;
     }
     
 }

@@ -9,11 +9,6 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public class WebControllerUI {
-    
-    public static void loginUser(String username, String password)
-    {
-        DataManagement.loginUser(username, password);
-        
-    }
+public enum PlotState {
+    EMPTY, PLANTED, SPROUTED, READY_TO_HARVEST;
 }
