@@ -11,4 +11,9 @@ package agriculturesystem;
  */
 public class WebControllerUI {
     
+    public static void loginUser(String username, String password)
+    {
+        DataManagement.loginUser(username, password);
+        
+    }
 }
