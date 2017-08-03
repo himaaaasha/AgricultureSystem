@@ -9,7 +9,6 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public enum AccessLevel {
-    FARMER, FOOD_PROCESSOR
-    
+public enum PlotState {
+    EMPTY, PLANTED, SPROUTED, READY_TO_HARVEST;
 }
