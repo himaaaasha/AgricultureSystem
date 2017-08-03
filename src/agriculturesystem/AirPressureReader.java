@@ -7,9 +7,12 @@ package agriculturesystem;
 
 /**
  *
- * @author Himasha Harinda
+ * @author Punnajee
  */
-public class WebControllerUI {
+public class AirPressureReader extends SensorReader{
     
-    DataManagement dataManagement;
+    public AirPressureReader(double readSensorData) {
+        super(readSensorData);
+    }
+    
 }
