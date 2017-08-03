@@ -9,9 +9,6 @@ package agriculturesystem;
  *
  * @author Himasha Harinda
  */
-public class Farm {
-    int farmId;
-    String name;
-    Area area;
+public enum SensorType {
     
 }

@@ -18,13 +18,18 @@ public class User implements Serializable{
     String password;
     String address;
     String sessionId;
+    AccessLevel accesslevel;
+    Farm farms;
+    
 
-    public User(String fullname, String username, String password, String address, String sessionId) {
+    public User(String fullname, String username, String password, String address, String sessionId, Farm farms, AccessLevel accesslevel) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
         this.address = address;
         this.sessionId = sessionId;
+        this.farms = farms;
+        this.accesslevel = accesslevel;
     }
 
     public String getFullname() {
@@ -67,6 +72,27 @@ public class User implements Serializable{
         this.sessionId = sessionId;
     }
 
+    public Farm getFarms() {
+        return farms;
+    }
+
+    public void setFarms(Farm farms) {
+        this.farms = farms;
+    }
+
+    public AccessLevel getAccesslevel() {
+        return accesslevel;
+    }
+
+    public void setAccesslevel(AccessLevel accesslevel) {
+        this.accesslevel = accesslevel;
+    }
+
+    
+
+    
+    
+    
     
     
     
