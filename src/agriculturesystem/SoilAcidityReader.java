@@ -7,9 +7,12 @@ package agriculturesystem;
 
 /**
  *
- * @author Himasha Harinda
+ * @author Punnajee
  */
-public class WebControllerUI {
+public class SoilAcidityReader extends SensorReader {
     
-    DataManagement dataManagement;
+    public SoilAcidityReader(double readSensorData) {
+        super(readSensorData);
+    }
+    
 }

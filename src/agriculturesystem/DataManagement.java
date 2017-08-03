@@ -13,8 +13,29 @@ import java.util.ArrayList;
  * @author Himasha Harinda
  */
 public class DataManagement {
-    public static void loginUser(String username, String password)
-    {
-        
+    SetOfUsers users;
+    SetOfFarms farms;
+
+    public DataManagement(SetOfUsers users, SetOfFarms farms) {
+        this.users = users;
+        this.farms = farms;
     }
+
+    public SetOfUsers getUsers() {
+        return users;
+    }
+
+    public void setUsers(SetOfUsers users) {
+        this.users = users;
+    }
+
+    public SetOfFarms getFarms() {
+        return farms;
+    }
+
+    public void setFarms(SetOfFarms farms) {
+        this.farms = farms;
+    }
+    
+    
 }
