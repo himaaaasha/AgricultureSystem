@@ -86,7 +86,7 @@ public class home extends javax.swing.JFrame {
 
         jButton10.setBackground(new java.awt.Color(153, 153, 153));
         jButton10.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jButton10.setText("FORM MANAGEMENT");
+        jButton10.setText("FARM MANAGEMENT");
         jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton10.setContentAreaFilled(false);
         jButton10.setIconTextGap(0);
