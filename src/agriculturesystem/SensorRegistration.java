@@ -7,9 +7,12 @@ package agriculturesystem;
 
 /**
  *
- * @author Himasha Harinda
+ * @author Punnajee
  */
-public class WebControllerUI {
-    
-    DataManagement dataManagement;
+public class SensorRegistration {
+    GPSCoord location;
+    boolean enabled;
+    long frequency;
+    FieldStationRegistration linkedStation;
+    int sensorID;
 }

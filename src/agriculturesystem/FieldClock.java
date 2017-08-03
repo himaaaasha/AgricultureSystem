@@ -7,9 +7,8 @@ package agriculturesystem;
 
 /**
  *
- * @author Himasha Harinda
+ * @author Punnajee
  */
-public class WebControllerUI {
+public class FieldClock {
     
-    DataManagement dataManagement;
 }
