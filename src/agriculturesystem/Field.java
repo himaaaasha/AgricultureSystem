@@ -10,5 +10,38 @@ package agriculturesystem;
  * @author Himasha Harinda
  */
 public class Field {
+    String name;
+    SetOfPlots plots;
+    Area area;
+
+    public Field(String name, SetOfPlots plots, Area area) {
+        this.name = name;
+        this.plots = plots;
+        this.area = area;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public SetOfPlots getPlots() {
+        return plots;
+    }
+
+    public void setPlots(SetOfPlots plots) {
+        this.plots = plots;
+    }
+
+    public Area getArea() {
+        return area;
+    }
+
+    public void setArea(Area area) {
+        this.area = area;
+    }
     
 }
