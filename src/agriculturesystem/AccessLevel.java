@@ -5,16 +5,10 @@
  */
 package agriculturesystem;
 
-import java.awt.List;
-import java.util.ArrayList;
-
 /**
  *
  * @author Himasha Harinda
  */
-public class DataManagement {
-    public static void loginUser(String username, String password)
-    {
-        
-    }
+public enum AccessLevel {
+    
 }
