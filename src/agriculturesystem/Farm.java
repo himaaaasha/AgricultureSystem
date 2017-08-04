@@ -5,11 +5,13 @@
  */
 package agriculturesystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class Farm {
+public class Farm implements Serializable{
     int farmId;
     String name;
     Area area;
@@ -20,6 +22,10 @@ public class Farm {
         this.name = name;
         this.area = area;
         this.fields = fields;
+    }
+
+    public Farm(String name, Area area) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getFarmId() {

@@ -10,6 +10,18 @@ package agriculturesystem;
  * @author Himasha Harinda
  */
 public enum AccessLevel {
-    FARMER, FOOD_PROCESSOR
+    FARMER, FOOD_PROCESSOR;
+
+    public static AccessLevel getFARMER() {
+        return FARMER;
+    }
+
+    public static AccessLevel getFOOD_PROCESSOR() {
+        return FOOD_PROCESSOR;
+    }
     
+    @Override
+    public String toString() {
+        return "AccessLevel{" + '}';
+    }
 }
