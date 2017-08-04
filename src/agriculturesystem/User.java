@@ -17,12 +17,12 @@ public class User implements Serializable{
     private String username;
     private String password;
     private String address;
-    private String sessionId;
+    private int sessionId;
     private AccessLevel accesslevel;
     private Farm farms;
     
-
-    public User(String fullname, String username, String password, String address, String sessionId, Farm farms, AccessLevel accesslevel) {
+    
+    public User(String fullname, String username, String password, String address, int sessionId, Farm farms, AccessLevel accesslevel) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
@@ -64,11 +64,11 @@ public class User implements Serializable{
         this.address = address;
     }
 
-    public String getSessionId() {
+    public int getSessionId() {
         return sessionId;
     }
 
-    public void setSessionId(String sessionId) {
+    public void setSessionId(int sessionId) {
         this.sessionId = sessionId;
     }
 
