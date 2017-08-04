@@ -29,14 +29,15 @@ public class SetOfFarms extends Vector<Farm>{
         super.remove(aFarm);
     }
     
-     public void loadFarm(SetOfFarms farm, JTable jt){    //done
-      for(Farm aFarm:farm){
+    public void loadFarm(SetOfFarms farm, JTable jt){    //done
+        for(Farm aFarm:farm){
           //create an vector list
           Vector row = new Vector(); 
           //Creating a defaultTableModel object to get data from class.
           //JTable.getModel() is returning correct class type.
           DefaultTableModel dtm = (DefaultTableModel)jt.getModel();
           //add element to the vector list
+          row.add(aFarm.getFarmId());
           row.add(aFarm.getName());
           row.add(aFarm.getArea());
          
@@ -44,8 +45,10 @@ public class SetOfFarms extends Vector<Farm>{
           
           dtm.addRow(row);
           jt.setModel(dtm);
-      }
-  }
+        }
+    }
+    
+    
     
     
 }
