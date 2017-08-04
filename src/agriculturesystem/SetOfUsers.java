@@ -6,6 +6,8 @@
 package agriculturesystem;
 
 import java.util.Vector;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -26,6 +28,30 @@ public class SetOfUsers extends Vector<User>{
     {
         super.remove(aUser);
     }
+    
+    public void loaduser(SetOfUsers users, JTable jt){    //done
+        for(User aUser:users){
+          //create an vector list
+          Vector row = new Vector(); 
+          //Creating a defaultTableModel object to get data from class.
+          //JTable.getModel() is returning correct class type.
+          DefaultTableModel dtm = (DefaultTableModel)jt.getModel();
+          //add element to the vector list
+          
+         
+          row.add(aUser.getFullname());
+          row.add(aUser.getUsername());
+          row.add(aUser.getPassword());
+          row.add(aUser.getAddress());
+          row.add(aUser.getSessionId());
+          row.add(aUser.getAccesslevel()); 
+          
+          
+          dtm.addRow(row);
+          jt.setModel(dtm);
+        }
+    }
+    
     
     
 }
