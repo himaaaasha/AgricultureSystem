@@ -1122,6 +1122,8 @@ public class farms extends javax.swing.JFrame {
         Long farmAreaLong;
         GPSCoord gpscoord = new GPSCoord(0, 0) ;
     
+        
+        
         name=farmName.getText();
         farmAreaLat= Long.parseLong(areaFarmLat.getText());
         farmAreaLong= Long.parseLong(areaFarmLong.getText());
