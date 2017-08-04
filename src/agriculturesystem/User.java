@@ -13,13 +13,13 @@ import java.util.*;
  * @author Himasha Harinda
  */
 public class User implements Serializable{
-    private String fullname;
-    private String username;
-    private String password;
-    private String address;
-    private String sessionId;
-    private AccessLevel accesslevel;
-    private Farm farms;
+    String fullname;
+    String username;
+    String password;
+    String address;
+    String sessionId;
+    AccessLevel accesslevel;
+    Farm farms;
     
 /*
     public User(String fullname, String username, String password, String address, String sessionId, Farm farms, AccessLevel accesslevel) {
