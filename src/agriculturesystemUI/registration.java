@@ -232,7 +232,6 @@ public class registration extends javax.swing.JFrame {
      String password;
      String address;
      int sessionId;
-     AccessLevel accesslevel = null ;
      Farm farms = null;
    //  SetOfUsers setofusers = new SetOfUsers();
      
@@ -243,8 +242,8 @@ public class registration extends javax.swing.JFrame {
     // sessionId
     //     accesslevel = (AccessLevel) jcombo_al.getSelectedItem();
     
-    JComboBox<accesslevel> comboBox = new JComboBox<>();
-    comboBox.setModel(new DefaultComboBoxModel<>(accesslevel));
+    JComboBox<AccessLevel> comboBox = new JComboBox<>();
+    comboBox.setModel(new DefaultComboBoxModel<>(AccessLevel.values()));
      
       try{
          SetOfUsers setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
