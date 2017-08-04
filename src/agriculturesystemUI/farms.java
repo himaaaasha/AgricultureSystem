@@ -1109,7 +1109,7 @@ public class farms extends javax.swing.JFrame {
 
         SerializationAndDeserialization.Serialization(farm, "SetOfFarms.txt");
         JOptionPane.showMessageDialog(null, "Successfully Added");
-       name=farmName.getText();
+        name=farmName.getText();
         area=areaFarm.getText();
         
         loadFarmTable();
