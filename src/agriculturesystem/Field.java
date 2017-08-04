@@ -5,11 +5,13 @@
  */
 package agriculturesystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class Field {
+public class Field implements Serializable {
     String name;
     SetOfPlots plots;
     Area area;

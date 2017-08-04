@@ -5,11 +5,13 @@
  */
 package agriculturesystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class Farm {
+public class Farm implements Serializable{
     int farmId;
     String name;
     Area area;

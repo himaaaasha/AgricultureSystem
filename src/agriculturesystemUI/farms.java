@@ -8,6 +8,7 @@ package agriculturesystemUI;
 import SerializationAndDeserialization.SerializationAndDeserialization;
 import agriculturesystem.Area;
 import agriculturesystem.Farm;
+import agriculturesystem.GPSCoord;
 import agriculturesystem.SetOfFarms;
 import agriculturesystem.SetOfFields;
 import agriculturesystem.SetOfUsers;
@@ -23,10 +24,6 @@ import javax.swing.table.DefaultTableModel;
  * @author hmowl
  */
 public class farms extends javax.swing.JFrame {
-
-    int farmId;
-    String name;
-    Area area;
     SetOfFarms farm = new SetOfFarms();
     Vector vectortitle = new Vector();
     
@@ -42,14 +39,7 @@ public class farms extends javax.swing.JFrame {
         Fields.setVisible(false);
         plots.setVisible(false);
         
-            try{
-             farm=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
-             
-         }  catch (IOException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            
             
     }
 
@@ -82,12 +72,15 @@ public class farms extends javax.swing.JFrame {
         jPanel22 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jPanel23 = new javax.swing.JPanel();
-        savebook1 = new javax.swing.JButton();
+        saveFarm = new javax.swing.JButton();
         jButton27 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         farmName = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        areaFarm = new javax.swing.JTextField();
+        areaFarmLat = new javax.swing.JTextField();
+        areaFarmLong = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
         Fields = new javax.swing.JPanel();
         jPanel10 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -313,12 +306,12 @@ public class farms extends javax.swing.JFrame {
 
         jPanel23.setBackground(new java.awt.Color(153, 153, 153));
 
-        savebook1.setBackground(new java.awt.Color(255, 255, 255));
-        savebook1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        savebook1.setText("Save");
-        savebook1.addActionListener(new java.awt.event.ActionListener() {
+        saveFarm.setBackground(new java.awt.Color(255, 255, 255));
+        saveFarm.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        saveFarm.setText("Save");
+        saveFarm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                savebook1ActionPerformed(evt);
+                saveFarmActionPerformed(evt);
             }
         });
 
@@ -337,7 +330,7 @@ public class farms extends javax.swing.JFrame {
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel23Layout.createSequentialGroup()
                 .addContainerGap(586, Short.MAX_VALUE)
-                .addComponent(savebook1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(saveFarm, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
@@ -345,7 +338,7 @@ public class farms extends javax.swing.JFrame {
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(savebook1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                .addComponent(saveFarm, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                 .addComponent(jButton27, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -357,40 +350,74 @@ public class farms extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Area of the Farm");
 
-        areaFarm.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        areaFarmLat.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        areaFarmLat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                areaFarmLatActionPerformed(evt);
+            }
+        });
+
+        areaFarmLong.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel13.setText("Latitudes");
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel16.setText("Longitudes");
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, 769, Short.MAX_VALUE)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addComponent(jPanel22, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
+                .addGap(120, 120, 120))
             .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                .addGap(0, 399, Short.MAX_VALUE)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(areaFarmLong, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(93, 93, 93))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                            .addComponent(areaFarmLat, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(30, 30, 30)))))
             .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel18Layout.createSequentialGroup()
                     .addGap(40, 40, 40)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(18, 18, 18)
                     .addComponent(farmName, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addGap(18, 18, 18)
-                    .addComponent(areaFarm, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(40, 40, 40)))
+                    .addContainerGap(398, Short.MAX_VALUE)))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
                 .addComponent(jPanel22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(areaFarmLat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(areaFarmLong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel18Layout.createSequentialGroup()
                     .addGap(46, 46, 46)
                     .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(farmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)
-                        .addComponent(areaFarm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(farmName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addContainerGap(77, Short.MAX_VALUE)))
         );
 
@@ -785,12 +812,10 @@ public class farms extends javax.swing.JFrame {
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(plotsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(plotsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(plotsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(plotsLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel12))
-                            .addGroup(plotsLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, plotsLayout.createSequentialGroup()
                                 .addGroup(plotsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel18))
@@ -816,7 +841,6 @@ public class farms extends javax.swing.JFrame {
                             .addComponent(jLabel20)
                             .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1088,33 +1112,51 @@ public class farms extends javax.swing.JFrame {
 */
     }//GEN-LAST:event_jButton26ActionPerformed
 
-    private void savebook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebook1ActionPerformed
-  
+    private void saveFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFarmActionPerformed
+        
+        int farmId;
+        String name;
+        SetOfFarms setoffarms = new SetOfFarms();
+        SetOfFields setoffields = new SetOfFields();
+        Long farmAreaLat;
+        Long farmAreaLong;
+        GPSCoord gpscoord = new GPSCoord(0, 0) ;
+    
         name=farmName.getText();
-    //    area=areaFarm.getText();
+        farmAreaLat= Long.parseLong(areaFarmLat.getText());
+        farmAreaLong= Long.parseLong(areaFarmLong.getText());
+        gpscoord.setLat(farmAreaLat);
+        gpscoord.setLng(farmAreaLong);
+        
+        Area area = new Area(gpscoord);
 
-        try{
-             farm=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+         try{
+             setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
              
-         }  catch (IOException ex) {
+             int numberOfFarms = setoffarms.size();
+             if(numberOfFarms == 0)
+             {
+                 farmId = 1;
+             }
+            else
+             {
+                farmId = numberOfFarms+1;
+                Farm aFarm;
+                aFarm = new Farm(farmId, name, area, setoffields);
+                setoffarms.addFarm(aFarm);
+          
+                SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
+                JOptionPane.showMessageDialog(null, "Successfully Added");
+             }
+             
+         }catch (IOException ex) {
                 Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-
-        Farm aFarm;
-        aFarm = new Farm(name, area);
-        farm.addFarm(aFarm);
-
-        SerializationAndDeserialization.Serialization(farm, "SetOfFarms.txt");
-        JOptionPane.showMessageDialog(null, "Successfully Added");
-        name=farmName.getText();
-        area=areaFarm.getText();
-        
+            Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
+        }
         loadFarmTable();
         
-    }//GEN-LAST:event_savebook1ActionPerformed
+    }//GEN-LAST:event_saveFarmActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
     /*
@@ -1219,6 +1261,10 @@ public class farms extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton28ActionPerformed
 
+    private void areaFarmLatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_areaFarmLatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_areaFarmLatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1257,7 +1303,8 @@ public class farms extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Fields;
     private javax.swing.JButton addmember;
-    private javax.swing.JTextField areaFarm;
+    private javax.swing.JTextField areaFarmLat;
+    private javax.swing.JTextField areaFarmLong;
     private javax.swing.JTextField farmName;
     private javax.swing.JPanel farms;
     private javax.swing.JButton jButton10;
@@ -1276,8 +1323,10 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -1324,7 +1373,7 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JTable jissuetable;
     private javax.swing.JTable jmembertable;
     private javax.swing.JPanel plots;
-    private javax.swing.JButton savebook1;
+    private javax.swing.JButton saveFarm;
     private javax.swing.JButton searchbookbtn;
     private javax.swing.JTextField searchbooktxt;
     private javax.swing.JTextField searchmembertxt;
