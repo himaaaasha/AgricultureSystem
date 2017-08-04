@@ -22,6 +22,10 @@ public class Farm {
         this.fields = fields;
     }
 
+    public Farm(String name, Area area) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getFarmId() {
         return farmId;
     }
