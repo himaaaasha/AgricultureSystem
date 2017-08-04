@@ -6,7 +6,6 @@
 package SerializationAndDeserialization;
 
 import agriculturesystem.SetOfFarms;
-import agriculturesystem.SetOfUsers;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,5 +31,7 @@ public class SerializationAndDeserialization {
         return objectIS.readObject();
 }    
 
-  
+    public static void Serialization(SetOfFarms farm, String setOfFieldstxt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
