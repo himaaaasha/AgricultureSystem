@@ -137,7 +137,7 @@ public class registration extends javax.swing.JFrame {
 
         jaddress.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jcombo_al.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcombo_al.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "FARMER", "FOOD PROCESSOR" }));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("Access Level");
@@ -232,6 +232,7 @@ public class registration extends javax.swing.JFrame {
      String password;
      String address;
      int sessionId;
+  //   AccessLevel accessLevel = new AccessLevel();
      Farm farms = null;
    //  SetOfUsers setofusers = new SetOfUsers();
      
@@ -239,29 +240,51 @@ public class registration extends javax.swing.JFrame {
      username = jusername.getText();
      password = jpassword.getText();
      address = jaddress.getText();
+     
+        try {
+            AccessLevel accessLevel = (AccessLevel) jcombo_al.getSelectedItem();
+        } catch (ClassCastException e) {
+        }
+        
+     
     // sessionId
-    //     accesslevel = (AccessLevel) jcombo_al.getSelectedItem();
+       //  accesslevel = (AccessLevel) jcombo_al.getSelectedItem();
     
-    JComboBox<AccessLevel> comboBox = new JComboBox<>();
-    comboBox.setModel(new DefaultComboBoxModel<>(AccessLevel.values()));
+    
      
       try{
-         SetOfUsers setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
+            SetOfUsers setofusers =new SetOfUsers();
+             setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
              
-             int numberOfUsers = setofusers.size();
+             int numberOfUsers = setofusers.lastElement().getSessionId();
              if(numberOfUsers == 0)
              {
                  sessionId = 1;
              }
             else
              {
+                 String accessl = (String) jcombo_al.getSelectedItem();
+                 
+                 
                 sessionId = numberOfUsers+1;
                 User aUser;
-                aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel);
-                setofusers.addUser(aUser);
+                AccessLevel accesslevel = null;
+                 if (accessl == "FARMER") {
+                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FARMER);
+                     setofusers.addUser(aUser);
+                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
+                    JOptionPane.showMessageDialog(null, "Successfully Added");
+                 }
+                 else{
+                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FOOD_PROCESSOR);
+                     setofusers.addUser(aUser);
+                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
+                     JOptionPane.showMessageDialog(null, "Successfully Added");
+                 }
+                
+                
           
-                SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
-                JOptionPane.showMessageDialog(null, "Successfully Added");
+                
              }
              
          } catch (IOException ex) {
