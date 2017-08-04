@@ -5,11 +5,13 @@
  */
 package agriculturesystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class GPSCoord {
+public class GPSCoord implements Serializable{
     double lat;
     double lng;
 

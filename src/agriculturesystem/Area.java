@@ -5,11 +5,13 @@
  */
 package agriculturesystem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Himasha Harinda
  */
-public class Area {
+public class Area implements Serializable {
     GPSCoord gpsPoints;
 
     public Area(GPSCoord gpsPoints) {
