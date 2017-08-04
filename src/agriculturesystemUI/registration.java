@@ -253,9 +253,10 @@ public class registration extends javax.swing.JFrame {
     
      
       try{
-         SetOfUsers setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
+            SetOfUsers setofusers =new SetOfUsers();
+             setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
              
-             int numberOfUsers = setofusers.size();
+             int numberOfUsers = setofusers.lastElement().getSessionId();
              if(numberOfUsers == 0)
              {
                  sessionId = 1;
