@@ -104,7 +104,7 @@ public class farms extends javax.swing.JFrame {
         jTextField4 = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        FarmListBox = new javax.swing.JList<String>();
         jLabel11 = new javax.swing.JLabel();
         plots = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -115,17 +115,17 @@ public class farms extends javax.swing.JFrame {
         jButton33 = new javax.swing.JButton();
         jButton32 = new javax.swing.JButton();
         jTextField8 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<String>();
         jLabel12 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<String>();
         jTextField5 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        jList2 = new javax.swing.JList<String>();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        jList3 = new javax.swing.JList<String>();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -589,7 +589,7 @@ public class farms extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel14.setText("Fields Area");
 
-        jScrollPane5.setViewportView(jList1);
+        jScrollPane5.setViewportView(FarmListBox);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel11.setText("Select Farm");
@@ -735,7 +735,7 @@ public class farms extends javax.swing.JFrame {
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel12.setText("Current Crop");
@@ -743,7 +743,7 @@ public class farms extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel15.setText("Plot Area");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jTextField5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
@@ -941,9 +941,6 @@ public class farms extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
         jLayeredPane1Layout.setHorizontalGroup(
@@ -956,13 +953,15 @@ public class farms extends javax.swing.JFrame {
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 573, Short.MAX_VALUE))
+                .addGap(0, 578, Short.MAX_VALUE))
             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jLayeredPane1Layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
+        jLayeredPane1.setLayer(jPanel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(jPanel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1326,6 +1325,7 @@ public class farms extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> FarmListBox;
     private javax.swing.JPanel Fields;
     private javax.swing.JButton addmember;
     private javax.swing.JTextField areaFarmLat;
@@ -1365,7 +1365,6 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLayeredPane jLayeredPane1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList2;
     private javax.swing.JList<String> jList3;
     private javax.swing.JPanel jPanel1;
@@ -1427,5 +1426,14 @@ public class farms extends javax.swing.JFrame {
   
  
 
+    }
+    
+    private void loadSelectFarmList() throws IOException, ClassNotFoundException
+    {
+        farm=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+        for(int i=0; i<farm.size();i++)
+        {
+            FarmListBox.add(farm.elementAt(i));
+        }
     }
 }
