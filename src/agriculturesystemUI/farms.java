@@ -27,6 +27,11 @@ public class farms extends javax.swing.JFrame {
     SetOfFarms farm = new SetOfFarms();
     Vector vectortitle = new Vector();
     
+    
+    
+    
+    
+    
     public farms() {
         initComponents();
         
