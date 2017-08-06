@@ -12,14 +12,24 @@ import java.io.Serializable;
  * @author Himasha Harinda
  */
 public class Field implements Serializable {
+    int fieldid;
     String name;
     SetOfPlots plots;
     Area area;
 
-    public Field(String name, SetOfPlots plots, Area area) {
+    public Field(int fieldid, String name, SetOfPlots plots, Area area) {
+        this.fieldid = fieldid;
         this.name = name;
         this.plots = plots;
         this.area = area;
+    }
+
+    public int getFieldid() {
+        return fieldid;
+    }
+
+    public void setFieldid(int fieldid) {
+        this.fieldid = fieldid;
     }
 
     public String getName() {
@@ -45,5 +55,7 @@ public class Field implements Serializable {
     public void setArea(Area area) {
         this.area = area;
     }
+
+    
     
 }

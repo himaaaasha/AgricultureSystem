@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Himasha Harinda
  */
 public class SetOfFarms extends Vector<Farm>{
+    private static final long serialVersionUID = -3738927583081807449L;
     public SetOfFarms()
     {
         super();
@@ -39,7 +40,8 @@ public class SetOfFarms extends Vector<Farm>{
           //add element to the vector list
           row.add(aFarm.getFarmId());
           row.add(aFarm.getName());
-          row.add(aFarm.getArea());
+          row.add(aFarm.getArea().getGpsPoints().getLat());
+          row.add(aFarm.getArea().getGpsPoints().getLng());
          
           
           
@@ -47,8 +49,6 @@ public class SetOfFarms extends Vector<Farm>{
           jt.setModel(dtm);
         }
     }
-    
-    
     
     
 }
