@@ -7,11 +7,11 @@ package agriculturesystem;
 
 /**
  *
- * @author Himasha Harinda
+ * @author Punnajee
  */
-public class AirTempReader extends SensorReader{
+public class SoilTempReader extends SensorReader {
     
-    public AirTempReader(double readSensorData) {
+    public SoilTempReader(double readSensorData) {
         super(readSensorData);
     }
     
