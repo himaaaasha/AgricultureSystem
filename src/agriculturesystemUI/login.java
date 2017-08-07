@@ -13,6 +13,7 @@ import agriculturesystem.SetOfFarms;
 import agriculturesystem.SetOfFields;
 import agriculturesystem.SetOfPlots;
 import agriculturesystem.SetOfUsers;
+import agriculturesystem.User;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -197,41 +198,9 @@ public class login extends javax.swing.JFrame {
         String username = usernameBox.getText();
         String password = String.valueOf(passwordBox.getPassword());
         String checkpass;
-        int sessionId = 0;
-        SetOfUsers setofusers = new SetOfUsers();
         
-        try {
-            
-            setofusers= (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
-            
-            for (int i = 0; i < setofusers.size();) {
-                if(username.equals(setofusers.elementAt(i).getUsername()) == true)
-                {
-                    if(password.equals(setofusers.elementAt(i).getPassword()))
-                    {
-                        
-                        JOptionPane.showMessageDialog(null, "Login successful!");
-                        farms farm = new farms();
-                        farm.setVisible(true);
-                        this.dispose();
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Invalid credentials!");
-                    }
-                    
-                    
-                }
-                 i++;
-            }
-            
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SetOfUsers users = new SetOfUsers();
+        users.loginUser(username, password);
     }//GEN-LAST:event_jButton26MouseClicked
 
     private void usernameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameBoxActionPerformed

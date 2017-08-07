@@ -105,7 +105,7 @@ public class farms extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
-        addmember = new javax.swing.JButton();
+        addField = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         FieldNameBox = new javax.swing.JTextField();
         FieldLatBox = new javax.swing.JTextField();
@@ -562,12 +562,12 @@ public class farms extends javax.swing.JFrame {
 
         jPanel13.setBackground(new java.awt.Color(153, 153, 153));
 
-        addmember.setBackground(new java.awt.Color(255, 255, 255));
-        addmember.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        addmember.setText("ADD");
-        addmember.addActionListener(new java.awt.event.ActionListener() {
+        addField.setBackground(new java.awt.Color(255, 255, 255));
+        addField.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        addField.setText("ADD");
+        addField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addmemberActionPerformed(evt);
+                addFieldActionPerformed(evt);
             }
         });
 
@@ -577,12 +577,12 @@ public class farms extends javax.swing.JFrame {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addmember, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addField, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(19, 19, 19))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(addmember, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(addField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -1182,36 +1182,11 @@ public class farms extends javax.swing.JFrame {
 
         }
         else{
-            
-            SetOfFarms setoffarms = new SetOfFarms();
+            int dlt = jfarmTable.getSelectedRow();
             
             DefaultTableModel def = (DefaultTableModel) jfarmTable.getModel();
-            int dlt = jfarmTable.getSelectedRow();
-            int FarmID = (int) def.getValueAt(dlt, 0);
-            FarmID =FarmID-1;
-            try {
-                
-                
-                setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
-                setoffarms.removeElementAt(FarmID);
-                
-            
-            } catch (IOException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        
-            try{
-                SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms); //serializing deleting member
-            
-            } catch (IOException ex) {
-                
-            } catch (ArrayIndexOutOfBoundsException ex) {
-                
-            }
-            JOptionPane.showMessageDialog(null, "Member Deleted Successfully");
+            SetOfFarms setoffarms = new SetOfFarms();
+            setoffarms.deleteFarm(def, dlt);
             loadFarmTable();
             loadFarmList();
         }                                       
@@ -1222,16 +1197,12 @@ public class farms extends javax.swing.JFrame {
 
     private void saveFarmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveFarmActionPerformed
         
-        int farmId;
+        
         String name;
-        SetOfFarms setoffarms = new SetOfFarms();
-        SetOfFields setoffields = new SetOfFields();
         Long farmAreaLat;
         Long farmAreaLong;
         GPSCoord gpscoord = new GPSCoord(0, 0) ;
     
-        
-        
         name=farmName.getText();
         farmAreaLat= Long.parseLong(areaFarmLat.getText());
         farmAreaLong= Long.parseLong(areaFarmLong.getText());
@@ -1239,30 +1210,9 @@ public class farms extends javax.swing.JFrame {
         gpscoord.setLng(farmAreaLong);
         
         Area area = new Area(gpscoord);
-
-         try{
-             setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
-             
-             int numberOfFarms = setoffarms.lastElement().getFarmId();
-             if(numberOfFarms == 0)
-             {
-                 farmId = 1;
-             }
-            else
-             {
-                farmId = numberOfFarms+1;
-                Farm aFarm;
-                aFarm = new Farm(farmId, name, area, setoffields);
-                setoffarms.addFarm(aFarm);
-                SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
-                JOptionPane.showMessageDialog(null, "Successfully Added");
-            }
-             
-         }catch (IOException ex) {
-                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-            Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SetOfFarms setoffarms = new SetOfFarms();
+        setoffarms.saveFarm(name, area);
+         
         loadFarmTable();
         loadFarmList();
         
@@ -1313,63 +1263,20 @@ public class farms extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_jButton30ActionPerformed
 
-    private void addmemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addmemberActionPerformed
+    private void addFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addFieldActionPerformed
    String FieldName;
         Long fieldAreaLat;
         Long fieldAreaLong;
-        int fieldId;
-        int farmId;
-        
-        GPSCoord gpscoord = new GPSCoord(0, 0) ;
-        SetOfPlots setofplots = new SetOfPlots();
-        SetOfFarms setoffarms = new SetOfFarms();
-        SetOfFields setOfFields = new SetOfFields();
         
         FieldName = FieldNameBox.getText().toString();
         fieldAreaLat = Long.parseLong(FieldLatBox.getText());
         fieldAreaLong = Long.parseLong(FieldLongBox.getText());
         
         String farmListSelected = FarmListBox.getSelectedValue();
-        try {
-            
-            setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
-            for(int i=0;i<setoffarms.size();i++)
-            {
-                if(farmListSelected.equals(setoffarms.elementAt(i).getName()))
-                {
-                    farmId = setoffarms.elementAt(i).getFarmId();
-                    
-                    //if(setoffarms.elementAt(farmId).getFields().size()==0)
-                    //{
-                        fieldId = 1;
-                    //}
-                    //else
-                    //{
-                        //fieldId = setoffarms.elementAt(farmId).getFields().size()+1;
-                        gpscoord.setLat(fieldAreaLat);
-                        gpscoord.setLng(fieldAreaLong);
-                        Area area = new Area(gpscoord);
-                        
-                        Field field = new Field(fieldId, FieldName, setofplots, area);
-                        setOfFields.addField(field);
-                        setoffarms.elementAt(farmId).setFields(setOfFields);
-                        JOptionPane.showMessageDialog(null, setoffarms.elementAt(farmId).getFields().size());
-                        SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
-                        JOptionPane.showMessageDialog(null, "Successfully Added");
-                        
-                        
-                    //}
-                }
-            }
-            
-        } catch (IOException ex) {
-            Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        SetOfFields setoffields = new SetOfFields();
+        setoffields.saveField(farmListSelected, fieldAreaLat, fieldAreaLong, FieldName);
         
-        
-    }//GEN-LAST:event_addmemberActionPerformed
+    }//GEN-LAST:event_addFieldActionPerformed
 
     private void jissuetableMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jissuetableMouseExited
     /*
@@ -1473,7 +1380,7 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JTextField FieldNameBox;
     private javax.swing.JList<String> FieldNameListBox;
     private javax.swing.JPanel Fields;
-    private javax.swing.JButton addmember;
+    private javax.swing.JButton addField;
     private javax.swing.JTextField areaFarmLat;
     private javax.swing.JTextField areaFarmLong;
     private javax.swing.JButton deleteFarmBTN;
