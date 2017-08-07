@@ -4,6 +4,19 @@
  * and open the template in the editor.
  */
 package agriculturesystemUI;
+import SerializationAndDeserialization.SerializationAndDeserialization;
+import agriculturesystem.Area;
+import agriculturesystem.Farm;
+import agriculturesystem.Field;
+import agriculturesystem.GPSCoord;
+import agriculturesystem.SetOfFarms;
+import agriculturesystem.SetOfFields;
+import agriculturesystem.SetOfPlots;
+import agriculturesystem.SetOfUsers;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,8 +44,8 @@ public class login extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jButton26 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        usernameBox = new javax.swing.JTextField();
+        passwordBox = new javax.swing.JPasswordField();
         jLabel3 = new javax.swing.JLabel();
         jButton27 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
@@ -60,6 +73,11 @@ public class login extends javax.swing.JFrame {
         jButton26.setBackground(new java.awt.Color(255, 255, 255));
         jButton26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton26.setText("Login");
+        jButton26.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton26MouseClicked(evt);
+            }
+        });
         jButton26.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton26ActionPerformed(evt);
@@ -69,9 +87,14 @@ public class login extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel2.setText("Username");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usernameBox.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        usernameBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameBoxActionPerformed(evt);
+            }
+        });
 
-        jPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        passwordBox.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("Password");
@@ -123,8 +146,8 @@ public class login extends javax.swing.JFrame {
                             .addComponent(jLabel3))
                         .addGap(37, 37, 37)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
-                            .addComponent(jTextField1))))
+                            .addComponent(passwordBox, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                            .addComponent(usernameBox))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -134,11 +157,11 @@ public class login extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(usernameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(passwordBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -167,8 +190,53 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton27ActionPerformed
+
+    private void jButton26MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton26MouseClicked
+        String username = usernameBox.getText();
+        String password = String.valueOf(passwordBox.getPassword());
+        String checkpass;
+        int sessionId = 0;
+        SetOfUsers setofusers = new SetOfUsers();
+        
+        try {
+            
+            setofusers= (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
+            
+            for (int i = 0; i < setofusers.size();) {
+                if(username.equals(setofusers.elementAt(i).getUsername()) == true)
+                {
+                    if(password.equals(setofusers.elementAt(i).getPassword()))
+                    {
+                        
+                        JOptionPane.showMessageDialog(null, "Login successful!");
+                        farms farm = new farms();
+                        farm.setVisible(true);
+                        this.dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Invalid credentials!");
+                    }
+                    
+                    
+                }
+                 i++;
+            }
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton26MouseClicked
+
+    private void usernameBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,7 +282,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField passwordBox;
+    private javax.swing.JTextField usernameBox;
     // End of variables declaration//GEN-END:variables
 }
