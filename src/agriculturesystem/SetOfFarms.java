@@ -5,7 +5,13 @@
  */
 package agriculturesystem;
 
+import SerializationAndDeserialization.SerializationAndDeserialization;
+import agriculturesystemUI.farms;
+import java.io.IOException;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,6 +53,57 @@ public class SetOfFarms extends Vector<Farm>{
           
           dtm.addRow(row);
           jt.setModel(dtm);
+        }
+    }
+    
+    public void deleteFarm(DefaultTableModel def,int dlt)
+    {
+        
+        int FarmID = (int) def.getValueAt(dlt, 0);
+            FarmID =FarmID-1;
+            try {
+                
+                
+            SetOfFarms setoffarms = (SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+            setoffarms.removeElementAt(FarmID);
+            SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
+            JOptionPane.showMessageDialog(null, "Member Deleted Successfully");
+            
+            } catch (IOException ex) {
+                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+    }
+    
+    public void saveFarm(String name, Area area)
+    {
+        int farmId;
+        SetOfFarms setoffarms = new SetOfFarms();
+        SetOfFields setoffields = new SetOfFields();
+        try{
+             setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+             
+             int numberOfFarms = setoffarms.lastElement().getFarmId();
+             if(numberOfFarms == 0)
+             {
+                 farmId = 1;
+             }
+            else
+             {
+                farmId = numberOfFarms+1;
+                Farm aFarm;
+                aFarm = new Farm(farmId, name, area, setoffields);
+                setoffarms.addFarm(aFarm);
+                SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
+                JOptionPane.showMessageDialog(null, "Successfully Added");
+            }
+             
+         }catch (IOException ex) {
+                Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+            Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

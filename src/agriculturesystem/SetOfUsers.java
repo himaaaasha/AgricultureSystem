@@ -5,7 +5,16 @@
  */
 package agriculturesystem;
 
+import SerializationAndDeserialization.SerializationAndDeserialization;
+import agriculturesystemUI.farms;
+import agriculturesystemUI.login;
+import agriculturesystemUI.registration;
+import java.io.IOException;
+import static java.rmi.server.RemoteRef.serialVersionUID;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Himasha Harinda
  */
 public class SetOfUsers extends Vector<User>{
+    static final long serialVersionUID = 277950243069653704L;
     public SetOfUsers()
     {
         super();
@@ -50,6 +60,95 @@ public class SetOfUsers extends Vector<User>{
           dtm.addRow(row);
           jt.setModel(dtm);
         }
+    }
+    
+    public void loginUser(String username, String password)
+    {
+        int sessionId = 0;
+        SetOfUsers setofusers = new SetOfUsers();
+        
+        try {
+            
+            setofusers= (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
+            
+            for (int i = 0; i < setofusers.size();) {
+                if(username.equals(setofusers.elementAt(i).getUsername()) == true)
+                {
+                    if(password.equals(setofusers.elementAt(i).getPassword()))
+                    {
+                        
+                        JOptionPane.showMessageDialog(null, "Login successful!");
+                        farms farm = new farms();
+                        farm.setVisible(true);
+                        login lgn = new login();
+                        lgn.dispose();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Invalid credentials!");
+                    }
+                    
+                    
+                }
+                 i++;
+            }
+            
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addUser(String fullname, String username, String password, String address,String accessl, Farm farms)
+    {
+        int sessionId;
+        try{
+            SetOfUsers setofusers =new SetOfUsers();
+             setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
+             
+             int numberOfUsers = setofusers.lastElement().getSessionId();
+             if(numberOfUsers == 0)
+             {
+                 sessionId = 1;
+             }
+            else
+             {
+                 
+                 
+                 
+                sessionId = numberOfUsers+1;
+                User aUser;
+                AccessLevel accesslevel = null;
+                
+                 if (accessl == "FARMER") {
+                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FARMER);
+                     setofusers.addUser(aUser);
+                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
+                    JOptionPane.showMessageDialog(null, "Successfully Added");
+                 }
+                 else{
+                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FOOD_PROCESSOR);
+                     setofusers.addUser(aUser);
+                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
+                     JOptionPane.showMessageDialog(null, "Successfully Added");
+                 }
+                
+                
+          
+                
+             }
+             
+         } catch (IOException ex) {
+            Logger.getLogger(registration.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(registration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+     
+     
+        
     }
     
     

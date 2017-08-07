@@ -264,71 +264,23 @@ public class registration extends javax.swing.JFrame {
      String password;
      String address;
      int sessionId;
-  //   AccessLevel accessLevel = new AccessLevel();
      Farm farms = null;
-   //  SetOfUsers setofusers = new SetOfUsers();
-     
      fullname = jfullname.getText();
      username = jusername.getText();
      password = jpassword.getText();
      address = jaddress.getText();
      
-        try {
-            AccessLevel accessLevel = (AccessLevel) jcombo_al.getSelectedItem();
-        } catch (ClassCastException e) {
-        }
+     try {
+        AccessLevel accessLevel = (AccessLevel) jcombo_al.getSelectedItem();
+     } catch (ClassCastException e) {
+     }
         
-     
-    // sessionId
-       //  accesslevel = (AccessLevel) jcombo_al.getSelectedItem();
-    
-    
-     
-      try{
-            SetOfUsers setofusers =new SetOfUsers();
-             setofusers = (SetOfUsers) SerializationAndDeserialization.Deserialization("SetOfUsers.txt");
-             
-             int numberOfUsers = setofusers.lastElement().getSessionId();
-             if(numberOfUsers == 0)
-             {
-                 sessionId = 1;
-             }
-            else
-             {
-                 String accessl = (String) jcombo_al.getSelectedItem();
-                 
-                 
-                sessionId = numberOfUsers+1;
-                User aUser;
-                AccessLevel accesslevel = null;
-                 if (accessl == "FARMER") {
-                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FARMER);
-                     setofusers.addUser(aUser);
-                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
-                    JOptionPane.showMessageDialog(null, "Successfully Added");
-                 }
-                 else{
-                     aUser = new User(fullname, username, password, address, sessionId, farms, accesslevel.FOOD_PROCESSOR);
-                     setofusers.addUser(aUser);
-                     SerializationAndDeserialization.Serialization("SetOfUsers.txt", setofusers);
-                     JOptionPane.showMessageDialog(null, "Successfully Added");
-                 }
-                
-                
-          
-                
-             }
-             
-         } catch (IOException ex) {
-            Logger.getLogger(registration.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(registration.class.getName()).log(Level.SEVERE, null, ex);
-        }
-     
-     
-        loadUserTable();
+     String accessl = (String) jcombo_al.getSelectedItem();
         
-        
+     SetOfUsers setofusers = new SetOfUsers();
+     setofusers.addUser(fullname, username, password, address, accessl, farms);
+     loadUserTable();
+     
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
