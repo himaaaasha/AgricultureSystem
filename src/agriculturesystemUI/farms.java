@@ -27,8 +27,12 @@ import javax.swing.table.DefaultTableModel;
  * @author hmowl
  */
 public class farms extends javax.swing.JFrame {
+    
+    
     String FarmListBoxVal;
     int FarmListBoxSelectedID;
+    int FieldListBoxSelectedID;
+    
     SetOfFarms farm = new SetOfFarms();
     Vector vectortitle = new Vector();
     
@@ -39,14 +43,13 @@ public class farms extends javax.swing.JFrame {
     
     public farms() {
         initComponents();
-        
-        
         loadFarmTable();
         loadFarmList();
         
         farms.setVisible(true);
         Fields.setVisible(false);
         plots.setVisible(false);
+        
         
             
             
@@ -95,8 +98,6 @@ public class farms extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jButton29 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jmembertable = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         searchmembertxt = new javax.swing.JTextField();
@@ -108,7 +109,6 @@ public class farms extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         FieldNameBox = new javax.swing.JTextField();
         FieldLatBox = new javax.swing.JTextField();
-        jLabel14 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         FarmListBox = new javax.swing.JList<>();
         jLabel11 = new javax.swing.JLabel();
@@ -116,6 +116,15 @@ public class farms extends javax.swing.JFrame {
         FieldLongBox = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        FieldLongListBox = new javax.swing.JList<>();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        FieldNameListBox = new javax.swing.JList<>();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        FieldLatListBox = new javax.swing.JList<>();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
         plots = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jissuetable = new javax.swing.JTable();
@@ -282,13 +291,13 @@ public class farms extends javax.swing.JFrame {
 
         jfarmTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Farm ID", "Farm name", "Area"
+                "Farm ID", "Farm name", "Farm Longitude", "Farm Latitude"
             }
         ));
         jScrollPane1.setViewportView(jfarmTable);
@@ -503,19 +512,6 @@ public class farms extends javax.swing.JFrame {
             .addComponent(jButton29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jmembertable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
-            },
-            new String [] {
-                "Farm Name", "Field Name", "Field Area"
-            }
-        ));
-        jScrollPane2.setViewportView(jmembertable);
-
         jPanel12.setBackground(new java.awt.Color(153, 153, 153));
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -596,9 +592,6 @@ public class farms extends javax.swing.JFrame {
 
         FieldLatBox.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
 
-        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel14.setText("Fields Area");
-
         FarmListBox.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 FarmListBoxMouseClicked(evt);
@@ -634,24 +627,18 @@ public class farms extends javax.swing.JFrame {
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel24))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(FieldLatBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FieldNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(FieldLongBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(52, 52, 52))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addGap(130, 130, 130))))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FieldLatBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FieldNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(FieldLongBox, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(52, 52, 52))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -662,9 +649,7 @@ public class farms extends javax.swing.JFrame {
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FieldNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel14)
-                        .addGap(8, 8, 8)
+                        .addGap(36, 36, 36)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(FieldLatBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22))
@@ -679,15 +664,54 @@ public class farms extends javax.swing.JFrame {
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jScrollPane4.setViewportView(FieldLongListBox);
+
+        FieldNameListBox.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                FieldNameListBoxMouseClicked(evt);
+            }
+        });
+        jScrollPane7.setViewportView(FieldNameListBox);
+
+        jScrollPane9.setViewportView(FieldLatListBox);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel14.setText("Fields");
+
+        jLabel25.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel25.setText("Field Latitude");
+
+        jLabel26.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel26.setText("Field Longitude");
+
         javax.swing.GroupLayout FieldsLayout = new javax.swing.GroupLayout(Fields);
         Fields.setLayout(FieldsLayout);
         FieldsLayout.setHorizontalGroup(
             FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FieldsLayout.createSequentialGroup()
+                .addGroup(FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FieldsLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(FieldsLayout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel25)
+                        .addGap(39, 39, 39)))
+                .addGroup(FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(FieldsLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel26)))
+                .addGap(164, 164, 164))
         );
         FieldsLayout.setVerticalGroup(
             FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -697,9 +721,23 @@ public class farms extends javax.swing.JFrame {
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FieldsLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FieldsLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FieldsLayout.createSequentialGroup()
+                                .addGroup(FieldsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel26))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(61, 61, 61)
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -1175,6 +1213,7 @@ public class farms extends javax.swing.JFrame {
             }
             JOptionPane.showMessageDialog(null, "Member Deleted Successfully");
             loadFarmTable();
+            loadFarmList();
         }                                       
 
         
@@ -1217,7 +1256,7 @@ public class farms extends javax.swing.JFrame {
                 setoffarms.addFarm(aFarm);
                 SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
                 JOptionPane.showMessageDialog(null, "Successfully Added");
-             }
+            }
              
          }catch (IOException ex) {
                 Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
@@ -1278,6 +1317,8 @@ public class farms extends javax.swing.JFrame {
    String FieldName;
         Long fieldAreaLat;
         Long fieldAreaLong;
+        int fieldId;
+        int farmId;
         
         GPSCoord gpscoord = new GPSCoord(0, 0) ;
         SetOfPlots setofplots = new SetOfPlots();
@@ -1288,32 +1329,45 @@ public class farms extends javax.swing.JFrame {
         fieldAreaLat = Long.parseLong(FieldLatBox.getText());
         fieldAreaLong = Long.parseLong(FieldLongBox.getText());
         
+        String farmListSelected = FarmListBox.getSelectedValue();
         try {
             
             setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
-            
-            for(int i=0; i<setoffarms.size();i++)
+            for(int i=0;i<setoffarms.size();i++)
             {
-                if(FarmListBoxVal == setoffarms.elementAt(i).getName())
+                if(farmListSelected.equals(setoffarms.elementAt(i).getName()))
                 {
-                    FarmListBoxSelectedID = setoffarms.elementAt(i).getFarmId();
+                    farmId = setoffarms.elementAt(i).getFarmId();
+                    
+                    //if(setoffarms.elementAt(farmId).getFields().size()==0)
+                    //{
+                        fieldId = 1;
+                    //}
+                    //else
+                    //{
+                        //fieldId = setoffarms.elementAt(farmId).getFields().size()+1;
+                        gpscoord.setLat(fieldAreaLat);
+                        gpscoord.setLng(fieldAreaLong);
+                        Area area = new Area(gpscoord);
+                        
+                        Field field = new Field(fieldId, FieldName, setofplots, area);
+                        setOfFields.addField(field);
+                        setoffarms.elementAt(farmId).setFields(setOfFields);
+                        JOptionPane.showMessageDialog(null, setoffarms.elementAt(farmId).getFields().size());
+                        SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
+                        JOptionPane.showMessageDialog(null, "Successfully Added");
+                        
+                        
+                    //}
                 }
             }
-            GPSCoord aGPSCoord = new GPSCoord(fieldAreaLat, fieldAreaLong);
-            Area aArea = new Area(aGPSCoord);
-            Field aField = new Field(FieldName, setofplots, aArea);
-            setOfFields.add(aField);
-            
-            setoffarms.elementAt(FarmListBoxSelectedID).setFields(setOfFields);
-            SerializationAndDeserialization.Serialization("SetOfFarms.txt", setoffarms);
-            JOptionPane.showMessageDialog(null, "Successfully Added");
-            
             
         } catch (IOException ex) {
             Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(farms.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
     }//GEN-LAST:event_addmemberActionPerformed
 
@@ -1362,8 +1416,15 @@ public class farms extends javax.swing.JFrame {
     }//GEN-LAST:event_FieldLongBoxActionPerformed
 
     private void FarmListBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FarmListBoxMouseClicked
-        FarmListBoxVal = FarmListBox.getSelectedValue();
+        
+        loadFieldNameList();
     }//GEN-LAST:event_FarmListBoxMouseClicked
+
+    private void FieldNameListBoxMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_FieldNameListBoxMouseClicked
+  
+        fieldLatList();
+        fieldLongList();
+    }//GEN-LAST:event_FieldNameListBoxMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1403,8 +1464,11 @@ public class farms extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> FarmListBox;
     private javax.swing.JTextField FieldLatBox;
+    private javax.swing.JList<String> FieldLatListBox;
     private javax.swing.JTextField FieldLongBox;
+    private javax.swing.JList<String> FieldLongListBox;
     private javax.swing.JTextField FieldNameBox;
+    private javax.swing.JList<String> FieldNameListBox;
     private javax.swing.JPanel Fields;
     private javax.swing.JButton addmember;
     private javax.swing.JTextField areaFarmLat;
@@ -1440,6 +1504,8 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1466,16 +1532,17 @@ public class farms extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTable jfarmTable;
     private javax.swing.JTable jissuetable;
-    private javax.swing.JTable jmembertable;
     private javax.swing.JPanel plots;
     private javax.swing.JButton saveFarm;
     private javax.swing.JButton searchbookbtn;
@@ -1519,6 +1586,129 @@ public class farms extends javax.swing.JFrame {
                 lml.addElement(setoffarms.elementAt(i).getName().toString());
             }
             FarmListBox.setModel(lml);
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
+    private void loadFieldNameList()
+    {
+        DefaultListModel lml = new DefaultListModel();
+        SetOfFarms setoffarms = new SetOfFarms();
+        
+        try {
+            setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+            String farmListSelected = FarmListBox.getSelectedValue();
+            int farmId;
+            for(int i=0;i<setoffarms.size();i++)
+            {
+                if(farmListSelected.equals(setoffarms.elementAt(i).getName()))
+                {
+                    farmId = setoffarms.elementAt(i).getFarmId();
+                    for(int k=0;k<setoffarms.elementAt(farmId).getFields().size();k++)
+                    {
+                
+                        lml.addElement(setoffarms.elementAt(farmId).getFields().elementAt(i).getName().toString());
+                    }
+                    FieldNameListBox.setModel(lml);
+                }
+            }
+            
+            
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
+    
+    private void fieldLatList()
+    {
+        
+        DefaultListModel lml = new DefaultListModel();
+        SetOfFarms setoffarms = new SetOfFarms();
+        
+        try {
+            setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+            String farmListSelected = FarmListBox.getSelectedValue();
+            String fieldListSelected = FieldNameListBox.getSelectedValue();
+            int farmId;
+            int fieldId;
+            
+            for (int i = 0; i <setoffarms.size(); i++) 
+            {
+                
+                if(farmListSelected.equals(setoffarms.elementAt(i).getName()))
+                {
+                    farmId = setoffarms.elementAt(i).getFarmId();
+                    for (int j = 0; j < setoffarms.elementAt(farmId).getFields().size() ; j++) {
+                        
+                        if(fieldListSelected.equals(setoffarms.elementAt(farmId).getFields().elementAt(j).getName().toString()))
+                        {
+                            fieldId = setoffarms.elementAt(farmId).getFields().elementAt(j).getFieldid();
+                            
+                            
+                            
+                            
+                            lml.addElement(setoffarms.elementAt(farmId).getFields().elementAt(j).getArea().getGpsPoints().getLat());
+                            FieldLatListBox.setModel(lml);
+                            
+                        }
+                    }
+                }
+            }
+            
+            
+            
+            
+        } catch (Exception e) {
+        }
+        
+        
+        
+    }
+    private void fieldLongList()
+    {
+        
+        DefaultListModel lml = new DefaultListModel();
+        SetOfFarms setoffarms = new SetOfFarms();
+        
+        try {
+            setoffarms=(SetOfFarms) SerializationAndDeserialization.Deserialization("SetOfFarms.txt");
+            String farmListSelected = FarmListBox.getSelectedValue();
+            String fieldListSelected = FieldNameListBox.getSelectedValue();
+            int farmId;
+            int fieldId;
+            
+            for (int i = 0; i <setoffarms.size(); i++) 
+            {
+                
+                if(farmListSelected.equals(setoffarms.elementAt(i).getName()))
+                {
+                    farmId = setoffarms.elementAt(i).getFarmId();
+                    for (int j = 0; j < setoffarms.elementAt(farmId).getFields().size() ; j++) {
+                        
+                        if(fieldListSelected.equals(setoffarms.elementAt(farmId).getFields().elementAt(j).getName().toString()))
+                        {
+                            fieldId = setoffarms.elementAt(farmId).getFields().elementAt(j).getFieldid();
+                            
+                            
+                            
+                            
+                            lml.addElement(setoffarms.elementAt(farmId).getFields().elementAt(j).getArea().getGpsPoints().getLng());
+                            FieldLongListBox.setModel(lml);
+                            
+                        }
+                    }
+                }
+            }
+            
+            
+            
+            
         } catch (Exception e) {
         }
         
